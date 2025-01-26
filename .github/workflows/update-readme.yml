@@ -1,38 +1,33 @@
-gh api repos/minhmc2007/Miside-Super-Wallpaper/contenlts/.github/workflows/update-readme.yml \
-  -f message="Add GitHub Actions workflow to update README" \
-  -f path=".github/workflows/update-readme.yml" \
-  -f content="$(echo -n "
 name: Update README with Download Count
 
 on:
   schedule:
-    - cron: '0 * * * *' # Run every hour
+    - cron: '0 * * * *'  # Run every hour
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+    name: "Update Download Count"  # Fix the name field here
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Update Download Count
         run: |
-          REPO=\"minhmc2007/Miside-Super-Wallpaper\"
-          README=\"README.md\"
+          REPO="minhmc2007/Miside-Super-Wallpaper"
+          README="README.md"
           MEDIAFIRE_COUNT=213
 
-          GH_COUNT=\$(curl -s https://api.github.com/repos/\$REPO/releases | \
+          GH_COUNT=$(curl -s https://api.github.com/repos/$REPO/releases | \
           jq '.[].assets[].download_count' | \
-          awk '{s+=\$1} END {print s}')
+          awk '{s+=$1} END {print s}')
 
-          TOTAL_COUNT=\$((MEDIAFIRE_COUNT + GH_COUNT))
+          TOTAL_COUNT=$((MEDIAFIRE_COUNT + GH_COUNT))
 
-          echo -e \"**Downloads:** \$TOTAL_COUNT\n\$(cat \$README)\" > \$README
+          echo -e "**Downloads:** $TOTAL_COUNT\n$(cat $README)" > $README
 
-          git config user.name \"github-actions[bot]\"
-          git config user.email \"github-actions[bot]@users.noreply.github.com\"
-          git add \$README
-          git commit -m \"Update download count\"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add $README
+          git commit -m "Update download count"
           git push
-")"
-
