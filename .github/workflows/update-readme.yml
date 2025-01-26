@@ -7,27 +7,32 @@ on:
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-    name: "Update Download Count"  # Fix the name field here
+    name: "Update Download Count"
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Update Download Count
+        env:
+          REPO: "minhmc2007/Miside-Super-Wallpaper"
+          TAG: "V1.0.0-final"  # Specific release tag
+          README: "README.md"
+          MEDIAFIRE_COUNT: 213
         run: |
-          REPO="minhmc2007/Miside-Super-Wallpaper"
-          README="README.md"
-          MEDIAFIRE_COUNT=213
-
-          GH_COUNT=$(curl -s https://api.github.com/repos/$REPO/releases | \
-          jq '.[].assets[].download_count' | \
+          # Get download count for the specified release
+          GH_COUNT=$(curl -s https://api.github.com/repos/$REPO/releases/tags/$TAG | \
+          jq '.assets[].download_count' | \
           awk '{s+=$1} END {print s}')
 
+          # Calculate total download count
           TOTAL_COUNT=$((MEDIAFIRE_COUNT + GH_COUNT))
 
+          # Update the README with the new count
           echo -e "**Downloads:** $TOTAL_COUNT\n$(cat $README)" > $README
 
+          # Configure git and push changes
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add $README
           git commit -m "Update download count"
-          git push
+          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/$REPO.git
