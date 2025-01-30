@@ -1,7 +1,7 @@
 # Miside-Super-Wallpaper
 This is miside super wallpaper based on s24 infinity wallpaper by  Andro Radar
 
-![Downloads](https://img.shields.io/badge/Downloads-221-brightgreen)
+![Downloads](https://img.shields.io/badge/Downloads-235-brightgreen)
 
 ![Downloads](https://img.shields.io/badge/Status-Stable-green)
 
