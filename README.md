@@ -1,4 +1,12 @@
-# Miside-Super-Wallpaper
+<p align="center">
+  <h1 align="center">Miside Super Wallpaper </h1>
+</p>
+<p align="center">
+  <sup>
+  Miside super wallpaper for your android phone!
+  </sup>
+</p>
+<div align="center">
 
 > ## 🎉 **300 Downloads Celebration!** 🎉
 
