@@ -36,5 +36,5 @@ If you have any questions about how to build, please [open an issue](https://git
 
 ---
 
-✨ **Thank you to everyone who has supported this project and helped us reach 407 downloads!**  
+✨ **Thank you to everyone who has supported this project and helped us reach +400 downloads!**  
 🚀 Here's to the next milestone! 🚀
